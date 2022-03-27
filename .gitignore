@@ -1,0 +1,10 @@
+.DS_Store
+
+.idea/
+.vscode/
+
+examples/02-defer-statement/infinite-defer-gen/main.go
+tasks/02-defer-statement/zip-archive/proverbs.zip
+
+*.out
+__debug*

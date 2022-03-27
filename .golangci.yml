@@ -1,0 +1,146 @@
+# На момент завершения работы над курсом версия линтера:
+# golangci-lint has version 1.44.2 built from d58dbde5 on 2022-02-17T20:58:06Z
+
+run:
+  skip-dirs-use-default: false
+  tests: true
+
+issues:
+  max-same-issues: 0
+
+  exclude:
+    - G107 # Potential HTTP request made with variable url
+    - G404 # Weak random number generator
+    - SA9003 # Empty branch
+
+  exclude-rules:
+    - source: .*github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go # Imports
+      linters:
+        - lll
+
+    - source: //go:generate
+      linters:
+        - lll
+          
+    - source: recover()
+      linters:
+        - errcheck
+
+    - path: examples/02-defer-statement/defer-vs-goto
+      linters:
+        - errcheck
+        - deadcode
+        - unused
+
+    - path: examples/03-panic-concept/exception
+      linters:
+        - typecheck
+
+    - path: examples/03-panic-concept/throw-exception
+      linters:
+        - typecheck
+
+    - path: tasks
+      linters:
+        - typecheck
+
+    - path: _test\.go
+      linters:
+        - dupl
+        - funlen
+        - lll
+
+linters-settings:
+  gosec:
+    excludes:
+      - G204
+
+  cyclop:
+    max-complexity: 20
+
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go)
+
+  lll:
+    line-length: 130
+
+  nestif:
+    min-complexity: 7
+
+  tagliatelle:
+    case:
+      use-field-name: true
+      rules:
+        json: snake
+
+linters:
+  disable-all: true
+  enable:
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - cyclop
+    - deadcode
+    - decorder
+    - depguard
+    - dogsled
+    - dupl
+    - durationcheck
+    - grouper
+    - errcheck
+    - errchkjson
+    - errname
+    - exhaustive
+    - exportloopref
+    - funlen
+    - gci
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - gofmt
+    - gofumpt
+    - goheader
+    - goimports
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ifshort
+    - importas
+    - ineffassign
+    - lll
+    - maintidx
+    - makezero
+    - misspell
+    - nestif
+    - nilerr
+    - nilnil
+    - noctx
+    - nolintlint
+    - prealloc
+    - predeclared
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - tagliatelle
+    - tenv
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unused
+    - varcheck
+    - wastedassign
+    - whitespace
