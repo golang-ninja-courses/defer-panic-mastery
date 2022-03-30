@@ -16,8 +16,17 @@ func TestLogPanicWithTrace_Example(t *testing.T) {
 	panic("sky is falling")
 }
 
+func TestLogPanicWithTrace_NoPanic(t *testing.T) {
+	b := newBufLogger()
+
+	defer func() {
+		assert.Empty(t, b.String(), "no panic but something was logged")
+	}()
+	defer LogPanicWithTrace(&b)
+}
+
 func TestLogPanicWithTrace_Smoke(t *testing.T) {
-	b := bufLogger{bytes.NewBuffer(nil)}
+	b := newBufLogger()
 
 	defer func() {
 		s, err := removeFilePathsFromStackTrace(b.Bytes())
@@ -76,6 +85,10 @@ func removeFilePathsFromStackTrace(s []byte) ([]byte, error) {
 
 type bufLogger struct {
 	*bytes.Buffer
+}
+
+func newBufLogger() bufLogger {
+	return bufLogger{bytes.NewBuffer(nil)}
 }
 
 func (b bufLogger) Logf(f string, args ...interface{}) {
