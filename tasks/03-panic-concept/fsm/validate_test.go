@@ -116,7 +116,7 @@ func TestValidate(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "two separate loops",
+			name: "two separate loops 1",
 			f: FSM{
 				StateInitial: {state1},
 				state1:       {state2},
@@ -125,6 +125,19 @@ func TestValidate(t *testing.T) {
 				state4:       {state5},
 				state5:       {state3},
 				StateEnd:     nil,
+			},
+			wantErr: true,
+		},
+		{
+			name: "two separate loops 2",
+			f: FSM{
+				StateInitial: {state1},
+				state1:       {state2},
+				state2:       {state1},
+				state3:       {state4},
+				state4:       {state5},
+				state5:       {state3, state6},
+				state6:       {StateEnd},
 			},
 			wantErr: true,
 		},
