@@ -30,7 +30,7 @@ func TestAssert(t *testing.T) {
 	cases := []struct {
 		cond          bool
 		msg           string
-		args          []interface{}
+		args          []any
 		expectedPanic string
 	}{
 		{
@@ -41,7 +41,7 @@ func TestAssert(t *testing.T) {
 		{
 			cond:          true,
 			msg:           "identifiers %q, %d, %#v already declared or resolved",
-			args:          []interface{}{"133a656", 4242, struct{ string }{"64ebed8"}},
+			args:          []any{"133a656", 4242, struct{ string }{"64ebed8"}},
 			expectedPanic: "",
 		},
 		{
@@ -52,7 +52,7 @@ func TestAssert(t *testing.T) {
 		{
 			cond:          false,
 			msg:           "identifiers %q, %d, %#v already declared or resolved",
-			args:          []interface{}{"133a656", 4242, struct{ string }{"64ebed8"}},
+			args:          []any{"133a656", 4242, struct{ string }{"64ebed8"}},
 			expectedPanic: `identifiers "133a656", 4242, struct { string }{string:"64ebed8"} already declared or resolved`,
 		},
 	}

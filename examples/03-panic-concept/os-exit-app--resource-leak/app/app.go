@@ -6,8 +6,8 @@ import (
 )
 
 type (
-	IStorage interface{}
-	ICache   interface{}
+	IStorage any
+	ICache   any
 )
 
 type App struct {

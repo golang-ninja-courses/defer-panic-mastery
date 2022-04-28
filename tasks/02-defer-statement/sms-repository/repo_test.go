@@ -217,6 +217,7 @@ func TestRepo_PartialLock(t *testing.T) {
 		require.NoError(t, r.Save(msgID))
 
 		err := r.Update(msgID, MessageStatusConfirmed)
+		require.NoError(t, err)
 
 		var wg sync.WaitGroup
 		wg.Add(2)

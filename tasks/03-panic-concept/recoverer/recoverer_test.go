@@ -15,7 +15,7 @@ func TestMain(m *testing.M) {
 
 func TestRecoverer_Do(t *testing.T) {
 	t.Run("no panic", func(t *testing.T) {
-		r, s := newTestRecoverer(func(_ interface{}) {
+		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		})
 		defer s.Wait()
@@ -30,7 +30,7 @@ func TestRecoverer_Do(t *testing.T) {
 	t.Run("panic", func(t *testing.T) {
 		var handlerCalls int
 		panicArg := new(runtime.TypeAssertionError)
-		r, s := newTestRecoverer(func(err interface{}) {
+		r, s := newTestRecoverer(func(err any) {
 			handlerCalls++
 			assert.Equal(t, err, panicArg)
 		})
@@ -52,12 +52,12 @@ func TestRecoverer_Do(t *testing.T) {
 
 func TestRecoverer_DoWithRecoveryHandler(t *testing.T) {
 	t.Run("no panic", func(t *testing.T) {
-		r, s := newTestRecoverer(func(_ interface{}) {
+		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of default recovery handler")
 		})
 		defer s.Wait()
 
-		h := func(_ interface{}) {
+		h := func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		}
 
@@ -69,14 +69,14 @@ func TestRecoverer_DoWithRecoveryHandler(t *testing.T) {
 	})
 
 	t.Run("panic", func(t *testing.T) {
-		r, s := newTestRecoverer(func(_ interface{}) {
+		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of default recovery handler")
 		})
 		defer s.Wait()
 
 		var handlerCalls int
 		panicArg := new(runtime.TypeAssertionError)
-		h := func(err interface{}) {
+		h := func(err any) {
 			handlerCalls++
 			assert.Equal(t, err, panicArg)
 		}
@@ -97,7 +97,7 @@ func TestRecoverer_DoWithRecoveryHandler(t *testing.T) {
 
 func TestRecoverer_Go(t *testing.T) {
 	t.Run("no panic", func(t *testing.T) {
-		r, s := newTestRecoverer(func(_ interface{}) {
+		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		})
 
@@ -119,7 +119,7 @@ func TestRecoverer_Go(t *testing.T) {
 
 		var handlerCalls int
 		panicArg := new(runtime.TypeAssertionError)
-		r, s := newTestRecoverer(func(err interface{}) {
+		r, s := newTestRecoverer(func(err any) {
 			mu.Lock()
 			defer mu.Unlock()
 			handlerCalls++
@@ -146,11 +146,11 @@ func TestRecoverer_Go(t *testing.T) {
 
 func TestRecoverer_GoWithRecoveryHandler(t *testing.T) {
 	t.Run("no panic", func(t *testing.T) {
-		r, s := newTestRecoverer(func(_ interface{}) {
+		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of default recovery handler")
 		})
 
-		h := func(_ interface{}) {
+		h := func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		}
 
@@ -170,13 +170,13 @@ func TestRecoverer_GoWithRecoveryHandler(t *testing.T) {
 	t.Run("panic", func(t *testing.T) {
 		var mu sync.Mutex
 
-		r, s := newTestRecoverer(func(_ interface{}) {
+		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of default recovery handler")
 		})
 
 		var handlerCalls int
 		panicArg := new(runtime.TypeAssertionError)
-		h := func(err interface{}) {
+		h := func(err any) {
 			mu.Lock()
 			defer mu.Unlock()
 			handlerCalls++

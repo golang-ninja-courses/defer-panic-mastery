@@ -1,6 +1,6 @@
 package recoverer
 
-type RecoveryHandler func(err interface{})
+type RecoveryHandler func(err any)
 
 type GoroutineStarter interface {
 	Go(func())

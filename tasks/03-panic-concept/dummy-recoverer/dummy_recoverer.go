@@ -1,6 +1,6 @@
 package recoverer
 
-type RecoveryHandler func(err interface{})
+type RecoveryHandler func(err any)
 
 // DummyRecoverer предполагается для использования в тестах.
 // Он не ловит паники в принципе.

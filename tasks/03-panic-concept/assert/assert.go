@@ -2,6 +2,6 @@
 
 package assert
 
-func Assert(cond bool, msg string, args ...interface{}) {
+func Assert(cond bool, msg string, args ...any) {
 	// Реализуй меня.
 }

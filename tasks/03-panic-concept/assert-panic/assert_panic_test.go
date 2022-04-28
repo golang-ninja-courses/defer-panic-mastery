@@ -63,6 +63,6 @@ func (t *mockT) Helper() {
 	t.markedAsHelper = true
 }
 
-func (t *mockT) Errorf(format string, args ...interface{}) {
+func (t *mockT) Errorf(format string, args ...any) {
 	t.failed = true
 }

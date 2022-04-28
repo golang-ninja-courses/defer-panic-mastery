@@ -61,7 +61,7 @@ func TestGroup(t *testing.T) {
 
 		cases := []struct {
 			name                      string
-			panicValue                interface{}
+			panicValue                any
 			errExpected               error
 			expectedInitialErrMessage string
 		}{

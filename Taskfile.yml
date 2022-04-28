@@ -25,7 +25,7 @@ tasks:
     cmds:
       - echo "Fmt..."
       - gofumpt -w .
-      - gci -w -local github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go . > /dev/null
+      - gci write -s Std -s Def -s "Prefix(github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go)" . 2> /dev/null
 
   lint:
     cmds:
@@ -34,12 +34,12 @@ tasks:
 
   lint:examples:
     - echo "Lint examples..."
-    - golangci-lint run --fix ./examples/...
+    - golangci-lint run ./examples/...
 
   lint:tasks:
     - echo "Lint tasks..."
-    - golangci-lint run --fix ./tasks/...
+    - golangci-lint run ./tasks/...
 
   lint:dir:
     - echo "Lint..."
-    - golangci-lint run --fix {{.CLI_ARGS}}
+    - golangci-lint run {{.CLI_ARGS}}

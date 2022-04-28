@@ -40,7 +40,7 @@ func TestDummyRecoverer_DoWithRecoveryHandler(t *testing.T) {
 	t.Run("no panic", func(t *testing.T) {
 		r := NewDummyRecoverer()
 
-		h := func(_ interface{}) {
+		h := func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		}
 
@@ -54,7 +54,7 @@ func TestDummyRecoverer_DoWithRecoveryHandler(t *testing.T) {
 	t.Run("panic", func(t *testing.T) {
 		r := NewDummyRecoverer()
 
-		h := func(_ interface{}) {
+		h := func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		}
 
@@ -105,7 +105,7 @@ func TestDummyRecoverer_GoWithRecoveryHandler(t *testing.T) {
 	t.Run("no panic", func(t *testing.T) {
 		r := NewDummyRecoverer()
 
-		h := func(_ interface{}) {
+		h := func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		}
 

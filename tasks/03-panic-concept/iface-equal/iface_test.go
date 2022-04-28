@@ -11,7 +11,7 @@ import (
 func TestInterfaceEqual(t *testing.T) {
 	cases := []struct {
 		name     string
-		lhs, rhs interface{}
+		lhs, rhs any
 		expected bool
 	}{
 		{

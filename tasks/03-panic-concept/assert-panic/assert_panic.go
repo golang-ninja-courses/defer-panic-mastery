@@ -1,7 +1,7 @@
 package coolassertlib
 
 type TestingT interface {
-	Errorf(format string, args ...interface{})
+	Errorf(format string, args ...any)
 	Helper()
 }
 

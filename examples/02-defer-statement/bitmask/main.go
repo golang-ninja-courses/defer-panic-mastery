@@ -22,6 +22,6 @@ func main() {
 	printBits(deferBits)
 }
 
-func printBits(v interface{}) {
+func printBits(v any) {
 	fmt.Printf("%08b\n", v)
 }

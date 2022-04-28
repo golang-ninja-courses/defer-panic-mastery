@@ -92,6 +92,6 @@ func throwErr(err error) {
 	panic(parseError{error: err})
 }
 
-func throwErrf(format string, args ...interface{}) {
+func throwErrf(format string, args ...any) {
 	throwErr(fmt.Errorf(format, args...))
 }

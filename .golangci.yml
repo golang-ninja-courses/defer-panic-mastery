@@ -1,5 +1,5 @@
 # На момент завершения работы над курсом версия линтера:
-# golangci-lint has version 1.44.2 built from d58dbde5 on 2022-02-17T20:58:06Z
+# golangci-lint has version 1.45.2 built from 8bdc4d3f on 2022-03-24T11:51:26Z
 
 run:
   skip-dirs-use-default: false
