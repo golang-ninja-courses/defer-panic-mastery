@@ -11,7 +11,7 @@ import (
 func TestMust(t *testing.T) {
 	t.Run("ok no error 1", func(t *testing.T) {
 		assert.NotPanics(t, func() {
-			result := Must(func() (int, error) {
+			var result int = Must(func() (int, error) {
 				return 42, nil
 			})
 			assert.Equal(t, 42, result)
@@ -22,7 +22,7 @@ func TestMust(t *testing.T) {
 		cmd := new(exec.Cmd)
 
 		assert.NotPanics(t, func() {
-			result := Must(func() (*exec.Cmd, error) {
+			var result *exec.Cmd = Must(func() (*exec.Cmd, error) {
 				return cmd, nil
 			})
 			assert.Equal(t, cmd, result)
@@ -31,7 +31,7 @@ func TestMust(t *testing.T) {
 
 	t.Run("ok no error 3", func(t *testing.T) {
 		assert.NotPanics(t, func() {
-			result := Must(func() (*exec.Cmd, error) {
+			var result *exec.Cmd = Must(func() (*exec.Cmd, error) {
 				return nil, nil //nolint:nilnil
 			})
 			assert.Nil(t, result)
@@ -42,7 +42,7 @@ func TestMust(t *testing.T) {
 		errExpected := errors.New("something went wrong")
 
 		assert.PanicsWithValue(t, errExpected, func() {
-			Must(func() (string, error) {
+			var _ string = Must(func() (string, error) {
 				return "", errExpected
 			})
 		})
@@ -52,7 +52,7 @@ func TestMust(t *testing.T) {
 		errExpected := errors.New("something went wrong")
 
 		assert.PanicsWithValue(t, errExpected, func() {
-			Must(func() (string, error) {
+			var _ string = Must(func() (string, error) {
 				return "garbage", errExpected // Не делайте так в реальной жизни!
 			})
 		})
@@ -62,7 +62,7 @@ func TestMust(t *testing.T) {
 		expectedMessage := "something went really wrong"
 
 		assert.PanicsWithValue(t, expectedMessage, func() {
-			Must(func() (any, error) {
+			var _ any = Must(func() (any, error) {
 				panic(expectedMessage)
 			})
 		})
