@@ -32,6 +32,10 @@ issues:
         - deadcode
         - unused
 
+    - path: examples/03-panic-concept/assert-go-uint
+      linters:
+        - typecheck
+
     - path: examples/03-panic-concept/exception
       linters:
         - typecheck

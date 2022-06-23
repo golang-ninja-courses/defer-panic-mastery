@@ -12,9 +12,11 @@ func TestToACE(t *testing.T) {
 		domainInUnicode     string
 		expectedDomainInACE string
 	}{
+		{domainInUnicode: "com", expectedDomainInACE: "com"}, // top level domain
 		{domainInUnicode: "go-proverbs.github.io", expectedDomainInACE: "go-proverbs.github.io"},
 		{domainInUnicode: "lagom-är-bäst.com", expectedDomainInACE: "xn--lagom-r-bst-q8ad.com"},
 		{domainInUnicode: "котомастер.рф", expectedDomainInACE: "xn--80aknijargfe.xn--p1ai"},
+		{domainInUnicode: "en.википедия.org", expectedDomainInACE: "en.xn--b1aeclack5b4j.org"},
 	}
 
 	for i, tt := range cases {
