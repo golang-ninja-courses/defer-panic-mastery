@@ -11,9 +11,9 @@ import (
 Для авторского решения:
 
 $ go test -benchmem -bench .
-BenchmarkRepo-8              146           8172592 ns/op             175 B/op          1 allocs/op
+BenchmarkRepo-8              100          10612337 ns/op             313 B/op          4 allocs/op
 PASS
-ok      tasks/02-defer-statement/sms-repository      2.076s
+ok      tasks/02-defer-statement/sms-repository      1.362s
 */
 
 func BenchmarkRepo(b *testing.B) {
