@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"path/filepath"
 	"testing"
 	"testing/fstest"
 	"time"
@@ -16,10 +15,12 @@ import (
 )
 
 func TestArchive_SmokeWithRealFS(t *testing.T) {
+	// NOTE: Don't use filepath.Join
+	// https://stepik.org/lesson/590501/step/4?discussion=7302903&unit=585453
 	inPaths := []string{
-		filepath.Join("testdata", "1.txt"),
-		filepath.Join("testdata", "2.txt"),
-		filepath.Join("testdata", "3.txt"),
+		"testdata/1.txt",
+		"testdata/2.txt",
+		"testdata/3.txt",
 	}
 	outPath := "proverbs.zip"
 
