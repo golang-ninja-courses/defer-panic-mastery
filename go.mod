@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/cockroachdb/errors v1.9.0
 	github.com/goccy/go-graphviz v0.0.9
-	github.com/labstack/echo/v4 v4.7.2
+	github.com/labstack/echo/v4 v4.9.0
 	github.com/labstack/gommon v0.3.1
 	github.com/stretchr/testify v1.7.0
 	go.uber.org/goleak v1.1.12
