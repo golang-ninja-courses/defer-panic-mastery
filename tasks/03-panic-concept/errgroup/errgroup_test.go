@@ -101,7 +101,7 @@ func TestGroup(t *testing.T) {
 				}
 
 				if tt.expectedInitialErrMessage != "" {
-					assert.Equal(t, err.Error()[len(expectedPrefix):], tt.expectedInitialErrMessage)
+					assert.Equal(t, tt.expectedInitialErrMessage, err.Error()[len(expectedPrefix):])
 				}
 			})
 		}
