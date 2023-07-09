@@ -131,3 +131,16 @@ func TestDummyRecoverer_GoWithRecoveryHandler(t *testing.T) {
 		// Can be tested, but it will be nasty code.
 	})
 }
+
+func TestDummyRecoverer_GoMethodsConcurrency(t *testing.T) {
+	r := NewDummyRecoverer()
+
+	ch1, ch2 := make(chan int), make(chan int)
+	val := 42
+
+	r.Go(func() { ch1 <- val })
+	r.GoWithRecoveryHandler(func() { ch2 <- <-ch1 }, func(_ any) {})
+
+	received := <-ch2
+	assert.Equal(t, received, val)
+}
