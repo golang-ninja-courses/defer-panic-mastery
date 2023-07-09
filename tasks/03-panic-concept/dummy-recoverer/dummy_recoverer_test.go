@@ -142,5 +142,5 @@ func TestDummyRecoverer_GoMethodsConcurrency(t *testing.T) {
 	r.GoWithRecoveryHandler(func() { ch2 <- <-ch1 }, func(_ any) {})
 
 	received := <-ch2
-	assert.Equal(t, received, val)
+	assert.Equal(t, val, received)
 }

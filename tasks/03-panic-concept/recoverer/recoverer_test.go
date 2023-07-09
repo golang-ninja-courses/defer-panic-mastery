@@ -18,13 +18,14 @@ func TestRecoverer_Do(t *testing.T) {
 		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
 		})
-		defer s.Wait()
+		defer s.Wait() // No effect expected.
 
 		var fnCalls int
 		for i := 0; i < 3; i++ {
 			r.Do(func() { fnCalls++ })
 		}
 		assert.Equal(t, 3, fnCalls)
+		assert.Equal(t, 0, s.Calls())
 	})
 
 	t.Run("panic", func(t *testing.T) {
@@ -34,7 +35,7 @@ func TestRecoverer_Do(t *testing.T) {
 			handlerCalls++
 			assert.Equal(t, err, panicArg)
 		})
-		defer s.Wait()
+		defer s.Wait() // No effect expected.
 
 		var fnCalls int
 		for i := 0; i < 6; i++ {
@@ -46,6 +47,7 @@ func TestRecoverer_Do(t *testing.T) {
 			})
 		}
 		assert.Equal(t, 6, fnCalls)
+		assert.Equal(t, 0, s.Calls())
 		assert.Equal(t, 3, handlerCalls)
 	})
 }
@@ -55,7 +57,7 @@ func TestRecoverer_DoWithRecoveryHandler(t *testing.T) {
 		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of default recovery handler")
 		})
-		defer s.Wait()
+		defer s.Wait() // No effect expected.
 
 		h := func(_ any) {
 			t.Fatal("unexpected call of recovery handler")
@@ -66,13 +68,14 @@ func TestRecoverer_DoWithRecoveryHandler(t *testing.T) {
 			r.DoWithRecoveryHandler(func() { fnCalls++ }, h)
 		}
 		assert.Equal(t, 3, fnCalls)
+		assert.Equal(t, 0, s.Calls())
 	})
 
 	t.Run("panic", func(t *testing.T) {
 		r, s := newTestRecoverer(func(_ any) {
 			t.Fatal("unexpected call of default recovery handler")
 		})
-		defer s.Wait()
+		defer s.Wait() // No effect expected.
 
 		var handlerCalls int
 		panicArg := new(runtime.TypeAssertionError)
@@ -91,6 +94,7 @@ func TestRecoverer_DoWithRecoveryHandler(t *testing.T) {
 			}, h)
 		}
 		assert.Equal(t, 6, fnCalls)
+		assert.Equal(t, 0, s.Calls())
 		assert.Equal(t, 3, handlerCalls)
 	})
 }
@@ -112,6 +116,7 @@ func TestRecoverer_Go(t *testing.T) {
 		}
 		s.Wait()
 		assert.Equal(t, 3, fnCalls)
+		assert.Equal(t, fnCalls, s.Calls())
 	})
 
 	t.Run("panic", func(t *testing.T) {
@@ -140,6 +145,7 @@ func TestRecoverer_Go(t *testing.T) {
 		}
 		s.Wait()
 		assert.Equal(t, 6, fnCalls)
+		assert.Equal(t, fnCalls, s.Calls())
 		assert.Equal(t, 3, handlerCalls)
 	})
 }
@@ -165,6 +171,7 @@ func TestRecoverer_GoWithRecoveryHandler(t *testing.T) {
 		}
 		s.Wait()
 		assert.Equal(t, 3, fnCalls)
+		assert.Equal(t, fnCalls, s.Calls())
 	})
 
 	t.Run("panic", func(t *testing.T) {
@@ -197,6 +204,7 @@ func TestRecoverer_GoWithRecoveryHandler(t *testing.T) {
 		}
 		s.Wait()
 		assert.Equal(t, 6, fnCalls)
+		assert.Equal(t, fnCalls, s.Calls())
 		assert.Equal(t, 3, handlerCalls)
 	})
 }
@@ -210,6 +218,9 @@ var _ GoroutineStarter = (*goWaiter)(nil)
 
 type goWaiter struct {
 	wg sync.WaitGroup
+
+	mu    sync.RWMutex
+	calls int
 }
 
 func newGoWaiter() *goWaiter {
@@ -217,6 +228,10 @@ func newGoWaiter() *goWaiter {
 }
 
 func (g *goWaiter) Go(f func()) {
+	g.mu.Lock()
+	g.calls++
+	g.mu.Unlock()
+
 	g.wg.Add(1)
 	go func() {
 		defer g.wg.Done()
@@ -226,4 +241,10 @@ func (g *goWaiter) Go(f func()) {
 
 func (g *goWaiter) Wait() {
 	g.wg.Wait()
+}
+
+func (g *goWaiter) Calls() int {
+	g.mu.Lock()
+	defer g.mu.Unlock()
+	return g.calls
 }
