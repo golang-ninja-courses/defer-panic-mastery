@@ -53,14 +53,14 @@ func ccc() {
 var expectedStackWithoutFilesRe = regexp.MustCompile(`sky is falling
 goroutine \d{1,3} \[running]:
 runtime/debug.Stack\(\)
-github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack.LogPanicWithTrace\({0x[0-9a-f]{4,16}\??, 0x[0-9a-f]{4,16}\??}\)
+github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack\.LogPanicWithTrace\({0x[0-9a-f]{4,16}\??, 0x[0-9a-f]{4,16}\??}\)
 panic\({0x[0-9a-f]{4,16}\??, 0x[0-9a-f]{4,16}\??}\)
-github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack.ccc\(...\)
-github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack.bbb\(...\)
-github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack.aaa\(...\)
-github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack.TestLogPanicWithTrace_Smoke\(0x[0-9a-f]{4,16}\??\)
-testing.tRunner\(0x[0-9a-f]{4,16}\??, 0x[0-9a-f]{4,16}\??\)
-created by testing.\(\*T\).Run`)
+github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack\.ccc\((\.{3})?\)
+github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack\.bbb\((\.{3})?\)
+github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack\.aaa\((\.{3})?\)
+github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/panic-stack\.TestLogPanicWithTrace_Smoke\(0x[0-9a-f]{4,16}\??\)
+testing\.tRunner\(0x[0-9a-f]{4,16}\??, 0x[0-9a-f]{4,16}\??\)
+created by testing\.\(\*T\)\.Run`)
 
 func removeFilePathsFromStackTrace(s []byte) ([]byte, error) {
 	var res bytes.Buffer
