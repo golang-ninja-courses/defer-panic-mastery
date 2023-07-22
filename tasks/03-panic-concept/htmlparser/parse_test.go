@@ -114,6 +114,11 @@ func TestParse(t *testing.T) {
 			wantError: true,
 		},
 		{
+			name:      "incorrect closing tag 2",
+			in:        `<h1>Go Proverbs<h1>`,
+			wantError: true,
+		},
+		{
 			name:      "nested tags",
 			in:        `<h1>Go Proverbs <p>Don't panic!</p></h1>`,
 			wantError: true,
