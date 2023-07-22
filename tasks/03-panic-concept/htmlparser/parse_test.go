@@ -114,7 +114,7 @@ func TestParse(t *testing.T) {
 			wantError: true,
 		},
 		{
-			name:      "incorrect closing tag 2",
+			name:      "opening tag as closing tag",
 			in:        `<h1>Go Proverbs<h1>`,
 			wantError: true,
 		},
