@@ -160,7 +160,7 @@ func TestGroup(t *testing.T) {
 		g.Go(func() error {
 			select {
 			case <-time.After(time.Second):
-				t.Fatal("no expected ctx cancellation")
+				assert.Fail(t, "no expected ctx cancellation")
 
 			case <-ctx.Done():
 				assert.True(t, badGoReturned)
@@ -186,7 +186,7 @@ func TestGroup(t *testing.T) {
 		g.Go(func() error {
 			select {
 			case <-time.After(time.Second):
-				t.Fatal("no expected ctx cancellation")
+				assert.Fail(t, "no expected ctx cancellation")
 
 			case <-ctx.Done():
 				assert.True(t, badGoReturned)
