@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"time"
 
-	envconfig "github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/must-parse-duration"
+	envconfig "github.com/golang-ninja-courses/defer-panic-mastery/tasks/03-panic-concept/must-parse-duration"
 )
 
 var syncPeriod = envconfig.MustParseDuration("SYNC_PERIOD")

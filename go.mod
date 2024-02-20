@@ -1,4 +1,4 @@
-module github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go
+module github.com/golang-ninja-courses/defer-panic-mastery
 
 go 1.18
 

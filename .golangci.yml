@@ -14,7 +14,7 @@ issues:
     - SA9003 # Empty branch
 
   exclude-rules:
-    - source: .*github\.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go # Imports
+    - source: .*github\.com/golang-ninja-courses/defer-panic-mastery # Imports
       linters:
         - lll
 
@@ -66,7 +66,7 @@ linters-settings:
     sections:
       - standard
       - default
-      - prefix(github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go)
+      - prefix(github.com/golang-ninja-courses/defer-panic-mastery)
 
   lll:
     line-length: 130
@@ -91,7 +91,6 @@ linters:
     - cyclop
     - deadcode
     - decorder
-    - depguard
     - dogsled
     - dupl
     - durationcheck

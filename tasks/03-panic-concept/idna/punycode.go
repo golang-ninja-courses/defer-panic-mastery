@@ -112,8 +112,9 @@ func adaptBias(delta, numPoints int32, firstTime bool) int32 {
 }
 
 // encodeDigit возвращает символ по коду:
-//  - 0..25 отображаются в ASCII a..z
-//  - 26..35 отображаются в ASCII 0..9
+//   - 0..25 отображаются в ASCII a..z
+//   - 26..35 отображаются в ASCII 0..9
+//
 // При любом другом значении digit функция паникует.
 func encodeDigit(digit int32) byte {
 	// Реализуй меня.

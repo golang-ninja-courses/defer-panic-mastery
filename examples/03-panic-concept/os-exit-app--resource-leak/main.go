@@ -6,10 +6,10 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/examples/03-panic-concept/os-exit-app--resource-leak/app"
-	"github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/examples/03-panic-concept/os-exit-app--resource-leak/filecache"
-	"github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/examples/03-panic-concept/os-exit-app--resource-leak/store"
-	"github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/examples/03-panic-concept/os-exit-app--resource-leak/worker"
+	"github.com/golang-ninja-courses/defer-panic-mastery/examples/03-panic-concept/os-exit-app--resource-leak/app"
+	"github.com/golang-ninja-courses/defer-panic-mastery/examples/03-panic-concept/os-exit-app--resource-leak/filecache"
+	"github.com/golang-ninja-courses/defer-panic-mastery/examples/03-panic-concept/os-exit-app--resource-leak/store"
+	"github.com/golang-ninja-courses/defer-panic-mastery/examples/03-panic-concept/os-exit-app--resource-leak/worker"
 )
 
 //nolint:errcheck

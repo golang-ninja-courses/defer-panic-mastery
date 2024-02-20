@@ -10,7 +10,7 @@ import (
 	"github.com/goccy/go-graphviz/cgraph"
 	"go.uber.org/multierr"
 
-	"github.com/www-golang-courses-ru/advanced-dealing-with-panic-in-go/tasks/03-panic-concept/fsm"
+	"github.com/golang-ninja-courses/defer-panic-mastery/tasks/03-panic-concept/fsm"
 )
 
 const (
