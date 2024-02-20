@@ -214,6 +214,30 @@ func TestValidate(t *testing.T) {
 			},
 			wantErr: true,
 		},
+		{
+			name: "loop without end state",
+			f: FSM{
+				StateInitial: {state1},
+				state1:       {state2},
+				state2:       {state3},
+				state3:       {state4},
+				state4:       {state2},
+			},
+			wantErr: true,
+		},
+		{
+			name: "loop through end state",
+			f: FSM{
+				StateInitial: {state1},
+				state1:       {state2},
+				state2:       {state3},
+				state3:       {state4},
+				state4:       {state5},
+				state5:       {StateEnd},
+				StateEnd:     {state2},
+			},
+			wantErr: true,
+		},
 
 		// Positive cases.
 		{
