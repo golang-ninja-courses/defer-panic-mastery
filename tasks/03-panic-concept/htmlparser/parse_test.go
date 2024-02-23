@@ -72,10 +72,10 @@ func TestParse(t *testing.T) {
 		},
 		{
 			name: "p h1 p",
-			in:   `<p>Welcome </p><h1>https://www.golang-courses.ru/</h1><p> to site!</p>`,
+			in:   `<p>Welcome </p><h1>https://golang-ninja.ru/</h1><p> to site!</p>`,
 			expTags: []Tag{
 				newTag(TagTypeParagraph, "Welcome "),
-				newTag(TagTypeHeaderLvl1, "https://www.golang-courses.ru/"),
+				newTag(TagTypeHeaderLvl1, "https://golang-ninja.ru/"),
 				newTag(TagTypeParagraph, " to site!"),
 			},
 		},

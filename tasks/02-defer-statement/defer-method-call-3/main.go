@@ -22,6 +22,6 @@ func processUser(u *User) {
 }
 
 func main() {
-	u := NewUser("info@golang-courses.ru")
+	u := NewUser("sensei@golang-ninja.ru")
 	processUser(u)
 }

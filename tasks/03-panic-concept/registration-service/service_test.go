@@ -99,54 +99,54 @@ func TestService_SignUp(t *testing.T) {
 	}{
 		{
 			name:        "valid email  valid password",
-			email:       "info@golang-courses.ru",
+			email:       "sensei@golang-ninja.ru",
 			password:    "AB!12cdef",
 			errExpected: nil,
 		},
 		// Минимум 3 строчных буквы.
 		{
 			name:        "valid email  invalid password 1",
-			email:       "info@golang-courses.ru",
+			email:       "sensei@golang-ninja.ru",
 			password:    "AB!12c..f",
 			errExpected: ErrWeakPassword,
 		},
 		// Минимум 2 заглавных буквы.
 		{
 			name:        "valid email  invalid password 2",
-			email:       "info@golang-courses.ru",
+			email:       "sensei@golang-ninja.ru",
 			password:    "Ab!12cdef",
 			errExpected: ErrWeakPassword,
 		},
 		// Минимум 2 цифры.
 		{
 			name:        "valid email  invalid password 3",
-			email:       "info@golang-courses.ru",
+			email:       "sensei@golang-ninja.ru",
 			password:    "AB!1Ecdef",
 			errExpected: ErrWeakPassword,
 		},
 		// Минимум один специальный символ !@#$%^&*()\-__+..
 		{
 			name:        "valid email  invalid password 4",
-			email:       "info@golang-courses.ru",
+			email:       "sensei@golang-ninja.ru",
 			password:    "ABno12cdefABno12cdef",
 			errExpected: ErrWeakPassword,
 		},
 		// Минимум 8 знаков длиной.
 		{
 			name:        "valid email  invalid password 5",
-			email:       "info@golang-courses.ru",
+			email:       "sensei@golang-ninja.ru",
 			password:    "AB!12cd",
 			errExpected: ErrWeakPassword,
 		},
 		{
 			name:        "invalid email  valid password",
-			email:       "infogolang-courses.ru",
+			email:       "senseigolang-ninja.ru",
 			password:    "AB!12cdef",
 			errExpected: ErrInvalidEmail,
 		},
 		{
 			name:        "invalid email  invalid password",
-			email:       "infogolang-courses.ru",
+			email:       "senseigolang-ninja.ru",
 			password:    "12345",
 			errExpected: ErrInvalidEmail,
 		},

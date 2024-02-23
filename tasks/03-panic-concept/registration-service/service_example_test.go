@@ -12,7 +12,7 @@ func ExampleNewService_invalidConfig() {
 		return
 	}
 
-	err = s.SignUp("info@golang-courses.ru", "Uqc7F4P7qY")
+	err = s.SignUp("sensei@golang-ninja.ru", "Uqc7F4P7qY")
 	mustNil(err)
 
 	// Output:
