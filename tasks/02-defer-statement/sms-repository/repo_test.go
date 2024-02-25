@@ -212,7 +212,7 @@ func TestRepo_ConcurrentAccess(t *testing.T) {
 func TestRepo_PartialLock(t *testing.T) {
 	const msgID = "1"
 
-	tryToHack := func() bool {
+	tryToHack := func() (hacked bool) {
 		r := NewRepo()
 		require.NoError(t, r.Save(msgID))
 
@@ -221,29 +221,17 @@ func TestRepo_PartialLock(t *testing.T) {
 
 		var wg sync.WaitGroup
 		wg.Add(2)
-
-		startUpdating := make(chan struct{})
-		go func() {
-			defer wg.Done()
-
-			close(startUpdating)
-			_ = r.Update(msgID, MessageStatusDelivered)
-		}()
-
-		<-startUpdating
-		go func() {
-			defer wg.Done()
-
-			for i := 0; i < 10; i++ {
-				_ = r.Update(msgID, MessageStatusFailed)
-			}
-		}()
-
+		var updErrors [2]error
+		go func() { updErrors[0] = r.Update(msgID, MessageStatusDelivered); wg.Done() }()
+		go func() { updErrors[1] = r.Update(msgID, MessageStatusFailed); wg.Done() }()
 		wg.Wait()
 
 		s, err := r.Get(msgID)
 		require.NoError(t, err)
-		return !assert.Equal(t, MessageStatusDelivered, s)
+		assert.Contains(t, []MessageStatus{MessageStatusDelivered, MessageStatusFailed}, s)
+
+		// Оба Update смогли "проскочить" и завершились без ошибки.
+		return (updErrors[0] == nil) && (updErrors[1] == nil)
 	}
 
 	for i := 0; i < 10_000; i++ {
